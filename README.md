@@ -1,13 +1,14 @@
 # OSRS Soapstones
-Work in progress!
-
-# Configuration
+## Configuration
 You need your own backend to receive and return the tiles between your friends.
 
 A master server option is possible once we have the funds to provide one as a configuration option.
 
-# Endpoints
-## GET
+- URL
+  - The URL the plugin will perform GET and POST requests to in order to save or get soapstones.
+
+## Endpoints
+### GET
 It needs to return this payload.
 ```json
 [
@@ -32,7 +33,7 @@ It needs to return this payload.
 ]
 ```
 
-## POST
+### POST
 It needs to save this payload.
 ```json
 {
@@ -46,7 +47,7 @@ It needs to save this payload.
 }
 ```
 
-# TODO:
+## TODO:
 - Shift right-click on existing tile, upvote/downvote soapstone.
 - Soap Stone tiles keep flashing because of full list refresh.
 - Use a lighter orange color.
