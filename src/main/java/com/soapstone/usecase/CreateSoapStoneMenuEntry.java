@@ -1,6 +1,6 @@
 package com.soapstone.usecase;
 
-import com.google.common.base.Strings;
+
 import com.soapstone.SoapStonePlugin;
 import com.soapstone.constants.CreateSoapStoneMenuEntryConstants;
 import java.util.Arrays;
@@ -46,7 +46,17 @@ public final class CreateSoapStoneMenuEntry {
   }
 
   public void execute(final MenuEntryAdded event) {
-    if (this.hotkeyNotPressed() || !this.isWalkHereEvent(event) || this.menuEntryAlreadyExists()) return;
+    if (this.hotkeyNotPressed()) {
+      return;
+    }
+
+    if (!this.isWalkHereEvent(event)) {
+      return;
+    }
+
+    if (this.menuEntryAlreadyExists()) {
+      return;
+    }
 
     final Tile target = this.client.getSelectedSceneTile();
     if (target == null) {
@@ -58,11 +68,6 @@ public final class CreateSoapStoneMenuEntry {
     if (!this.plugin.getSoapStoneTiles().hasASoapStoneAtWorldPoint(worldPoint)) {
       this.promptForSoapStoneCreation(event, target);
     }
-    /* else {
-      if (this.playerOwnsSoapStoneAtWorldLocation(worldPoint)) {
-         this.promptForSoapStoneDeletion();
-       }
-    } */
   }
 
   private boolean menuEntryAlreadyExists() {
@@ -104,7 +109,7 @@ public final class CreateSoapStoneMenuEntry {
   }
 
   private void promptForSoapStoneCreation(final MenuEntryAdded event, final Tile target) {
-    this.client.createMenuEntry(-10)
+    this.client.createMenuEntry(-1)
         .setOption(CreateSoapStoneMenuEntryConstants.SOAP_STONE_MENU_ENTRY)
         .setTarget(event.getTarget())
         .setType(MenuAction.RUNELITE)
