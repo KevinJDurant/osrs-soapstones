@@ -17,6 +17,7 @@ import net.runelite.api.events.MenuEntryAdded;
 import net.runelite.client.chat.ChatMessageManager;
 import net.runelite.client.chat.QueuedMessage;
 import net.runelite.client.game.chatbox.ChatboxPanelManager;
+import org.apache.commons.lang3.StringUtils;
 
 @Singleton
 @Slf4j
@@ -27,6 +28,8 @@ public final class CreateSoapStoneMenuEntry {
   private final SaveSoapStone saveSoapStone;
   private final ChatMessageManager chatMessageManager;
   private final ChatboxPanelManager chatboxPanelManager;
+
+  private static final String WALK_HERE = "Walk here";
 
   @Inject
   public CreateSoapStoneMenuEntry(
@@ -71,7 +74,7 @@ public final class CreateSoapStoneMenuEntry {
     this.chatboxPanelManager.openTextInput(CreateSoapStoneMenuEntryConstants.SOAP_STONE_PROMPT_TITLE)
         .value("")
         .onDone(input -> {
-          if (Strings.isNullOrEmpty(input)) return;
+          if (StringUtils.isBlank(input)) return;
           if (input.length() > CreateSoapStoneMenuEntryConstants.MAX_INPUT_LENGTH) {
             this.sendMaxInputErrorChatMessage();
           } else {
@@ -97,7 +100,7 @@ public final class CreateSoapStoneMenuEntry {
   }
 
   private boolean isWalkHereEvent(final MenuEntryAdded event) {
-    return event.getOption().equals("Walk here");
+    return event.getOption().equals(WALK_HERE);
   }
 
   private void promptForSoapStoneCreation(final MenuEntryAdded event, final Tile target) {

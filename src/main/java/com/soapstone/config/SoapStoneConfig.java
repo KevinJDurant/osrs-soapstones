@@ -10,12 +10,11 @@ public interface SoapStoneConfig extends Config {
 
   @ConfigItem(
       position = 1,
-      keyName = "soapStoneProfanityFilter",
-      name = "Profanity Filter",
-      description = "Having the profanity filter on will mean any swearing or offensive language will be starred out as best as the plugin can."
+      keyName = "soapstoneServerBaseUrl",
+      name = "SoapStones URL",
+      description = "This URL needs to return the SoapStones in JSON format as described in the README.md."
   )
-  default boolean profanityFilterEnabled()
-  {
-    return true;
+  default String getSoapStoneServerBaseUrl() {
+    return "";
   }
 }
