@@ -1,5 +1,6 @@
 package com.soapstone.overlay;
 
+import static java.util.Objects.isNull;
 import static net.runelite.api.Perspective.getCanvasTextLocation;
 import static net.runelite.api.Perspective.getCanvasTilePoly;
 import static net.runelite.client.ui.overlay.OverlayUtil.renderTextLocation;
@@ -76,7 +77,16 @@ public final class SoapStoneOverlay extends Overlay {
   }
 
   private void renderPolygon(final Graphics2D graphics, final LocalPoint localPoint) {
+    if (isNull(graphics) || isNull(localPoint)) {
+      return;
+    }
+
     final Polygon poly = getCanvasTilePoly(client, localPoint);
+
+    if (isNull(poly)) {
+      return;
+    }
+
     OverlayUtil.renderPolygon(graphics, poly, SoapStoneOverlayConstants.ORANGE);
   }
 
@@ -104,6 +114,6 @@ public final class SoapStoneOverlay extends Overlay {
   }
 
   private boolean messageIsTooLong(final String message) {
-    return SoapStoneOverlayConstants.MAX_MESSAGE_LENGTH >= message.length();
+    return SoapStoneOverlayConstants.MAX_MESSAGE_LENGTH <= message.length();
   }
 }

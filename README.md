@@ -1,4 +1,12 @@
 # OSRS Soapstones
+![readme.png](readme.png)
+
+These are just persistent tiles places by everyone.
+
+Shared over all worlds, over all areas by everyone.
+
+Right-click with shift to place a soapstone.
+
 ## Configuration
 You need your own backend to receive and return the tiles between your friends.
 
